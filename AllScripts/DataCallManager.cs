@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public static class JsonHelper
+/*public static class JsonHelper
 {
     public static T[] FromJson<T>(string json)
     {
@@ -25,7 +25,7 @@ public static class JsonHelper
         public T[] Items;
     }
 
-}
+}*/
 
 public class DataCallManager : MonoBehaviour {
 
