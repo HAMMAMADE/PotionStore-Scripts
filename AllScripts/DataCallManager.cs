@@ -25,7 +25,7 @@ using UnityEngine;
         public T[] Items;
     }
 
-}*/*/
+}*/
 
 public class DataCallManager : MonoBehaviour {
 
