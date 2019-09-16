@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -101,23 +102,21 @@ public class CustomerControl : MonoBehaviour {
                     backPos.z = -2;
                     transform.position = backPos;
 
-                    for (int index = 0; index <= 2; index++)//만족도를 확인하기 위해 배열을 돌면서 확인 
-                    { 
-                        for (int index2 = 0; index2 <= WantPotionType.Length - 1; index2++)
+                    for (int index = 0; index <= 2; index++)
+                    {
+                        int checkNum =  Array.IndexOf<int>(WantPotionType, ComPotionParmeter.PotionType[index]);
+                        if(checkNum >= 0)
                         {
-                            if (ComPotionParmeter.PotionType[index] == WantPotionType[index2])
-                            {
-                                EmotionCount += 1.5f;
-                                StatusManager.EvaPoint += EvaUpPoint;
-                                AllEvaPoint += EvaUpPoint;
-                                isOk = true;
-                            }
-                            else
-                            {
-                                EmotionCount -= 0.5f;
-                                StatusManager.EvaPoint -= EvaDownPoint;
-                                AllEvaPoint -= EvaDownPoint;
-                            }
+                            EmotionCount += 1f;
+                            StatusManager.EvaPoint += EvaUpPoint;
+                            AllEvaPoint += EvaUpPoint;
+                            isOk = true;
+                        }
+                        else
+                        {
+                            EmotionCount -= 1f;
+                            StatusManager.EvaPoint -= EvaDownPoint;
+                            AllEvaPoint -= EvaDownPoint;
                         }
                     }
                     if(EmotionCount > 1f)
@@ -142,7 +141,7 @@ public class CustomerControl : MonoBehaviour {
                             Rigidbody2D Pricerigid;
                             Vector3 outPower;
                             Transform PriceOutPos = GameObject.Find("Price_Position").transform;
-                            int PriceDice = Random.Range(0, 2);
+                            int PriceDice = UnityEngine.Random.Range(0, 2);
                         if (!isDebuff)
                         {
                             switch (PriceDice)
@@ -150,21 +149,21 @@ public class CustomerControl : MonoBehaviour {
                                 case 0:
                                     OuttedPrice = Instantiate(CustomerPrice, PriceOutPos);
                                     Pricerigid = OuttedPrice.GetComponent<Rigidbody2D>();
-                                    outPower = new Vector2(-3f, Random.Range(5f, 6f));
+                                    outPower = new Vector2(-3f, UnityEngine.Random.Range(5f, 6f));
                                     Pricerigid.AddForce(outPower, ForceMode2D.Impulse);
                                     Pricerigid.AddTorque(90f);
                                     break;
                                 case 1:
                                     OuttedPrice = Instantiate(CustomerPrice2, PriceOutPos);
                                     Pricerigid = OuttedPrice.GetComponent<Rigidbody2D>();
-                                    outPower = new Vector2(-3f, Random.Range(5f, 6f));
+                                    outPower = new Vector2(-3f, UnityEngine.Random.Range(5f, 6f));
                                     Pricerigid.AddForce(outPower, ForceMode2D.Impulse);
                                     Pricerigid.AddTorque(90f);
                                     break;
                                 case 2:
                                     OuttedPrice = Instantiate(CustomerPrice3, PriceOutPos);
                                     Pricerigid = OuttedPrice.GetComponent<Rigidbody2D>();
-                                    outPower = new Vector2(-3f, Random.Range(5f, 6f));
+                                    outPower = new Vector2(-3f, UnityEngine.Random.Range(5f, 6f));
                                     Pricerigid.AddForce(outPower, ForceMode2D.Impulse);
                                     Pricerigid.AddTorque(90f);
                                     break;

@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public static class JsonHelper
+/*public static class JsonHelper
 {
     public static T[] FromJson<T>(string json)
     {
@@ -25,7 +25,7 @@ public static class JsonHelper
         public T[] Items;
     }
 
-}
+}*/
 
 public class DataCallManager : MonoBehaviour {
 
@@ -69,7 +69,7 @@ public class DataCallManager : MonoBehaviour {
         ChashItemType = new string[] { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" };//15개
         ChashPotionType = new string[] { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0","0","0"};//13개
 
-        if (!File.Exists(Application.dataPath.Replace("/Assets", "") + fileName))
+        if (!File.Exists(Application.persistentDataPath.Replace("/Andriod/data/kr.Hamma.pharmacy/files", "") + fileName))
         {
             dataVo = new DataVo();
             DataLoad();
@@ -77,7 +77,7 @@ public class DataCallManager : MonoBehaviour {
         }
         else
         {
-            StreamReader streamReader = new StreamReader(Application.dataPath.Replace("/Assets", "") + fileName);
+            StreamReader streamReader = new StreamReader(Application.persistentDataPath.Replace("/Andriod/data/kr.Hamma.pharmacy/files", "") + fileName);
             dataVo = JsonMapper.ToObject<DataVo>(streamReader.ReadToEnd());
             streamReader.Close();
             DataLoad(dataVo);
@@ -215,13 +215,13 @@ public class DataCallManager : MonoBehaviour {
 
         if (!isExistFile)
         {
-            var sr = File.CreateText(Application.dataPath.Replace("/Assets", "") + fileName);
+            var sr = File.CreateText(Application.persistentDataPath.Replace("/Andriod/data/kr.Hamma.pharmacy/files", "") + fileName);
             sr.WriteLine(saveData.ToString());
             sr.Close();
         }
         else
         {   
-            File.WriteAllText(Application.dataPath.Replace("/Assets", "") + fileName, saveData.ToString());
+            File.WriteAllText(Application.persistentDataPath.Replace("/Andriod/data/kr.Hamma.pharmacy/files", "") + fileName, saveData.ToString());
         }
 
         //---------데이터 연결(매니저들을 호출하고 매니저의 엑세스 메소드를 부른다.)
@@ -396,6 +396,6 @@ public class DataCallManager : MonoBehaviour {
         JsonMapper.ToJson(dataVo, writer);
         JsonData saveData = sb.ToString();
 
-        File.WriteAllText(Application.dataPath.Replace("/Assets", "") + fileName, saveData.ToString());
+        File.WriteAllText(Application.persistentDataPath.Replace("/Andriod/data/kr.Hamma.pharmacy/files", "") + fileName, saveData.ToString());
     }
 }

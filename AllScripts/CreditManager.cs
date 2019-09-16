@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CreditManager : MonoBehaviour
 {
     public Animator Credit;
+    public UI2DSprite spriteRenderer;
 
     void Start()
     {
@@ -39,16 +40,17 @@ public class CreditManager : MonoBehaviour
 
     IEnumerator ScreenFadeOut()
     {
-        UI2DSprite spriteRenderer = GameObject.Find("UIFadeOut").GetComponent<UI2DSprite>();
+        //UI2DSprite spriteRenderer = GameObject.Find("UIFadeOut").GetComponent<UI2DSprite>();
         Color currentColor = spriteRenderer.color;
 
         currentColor.a += 0.05f;
         spriteRenderer.color = currentColor;
 
-        SoundManager.sounds["CreditMusic"].volume -= 0.05f;
+        SoundManager.sounds["CartoonBGM"].volume -= 0.05f;
 
         if (currentColor.a >= 1)
         {
+            Debug.Log("타이틀로");
             SceneManager.LoadScene("MainMenu");
             yield break;
         }
